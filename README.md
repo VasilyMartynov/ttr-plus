@@ -47,6 +47,7 @@ Whenever it breaks midgame you can use `/ttrp init` to wipe changes and overwrit
 ## Thanks
 
 Many thanks to [Warhammer Return of Reckoning Team ](https://www.returnofreckoning.com/)
+
 Tools and addon Library of [Idrinth](https://tools.idrinth.de/)
 
 Original Author of the Mod - Sullemunk
