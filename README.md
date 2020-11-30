@@ -14,18 +14,18 @@ Copy `./ThankTheResserPlus` directory to your game addons folder (`./Warhammer O
 
 Addon provides simple ingame console help and instructions.
 
-`/ttrp off` - turns Thank The Resser off
+`/ttrp off` - turns Thank The Resser off \
 `/ttrp on`  - turns Thank The Resser on
 
-`/ttrp mode`   - shows current mode (random | word)
-`/ttrp word`   - sets the mode to custom phrase, default unless provided.
+`/ttrp mode`   - shows current mode (random | word) \
+`/ttrp word`   - sets the mode to custom phrase, default unless provided. \
 `/ttrp random` - sets the mode to random pregenerated set of messages. \
 Custom phrases coming sometime, maybe. \
 Really, if I've to overcome my laziness and game framework.
 
 `/ttrp <phrase>` - sets thanks phrase upon resurrection. Use `%p` to insert the resurrector's name.
 
-`/ttrp init` - wipe and reinitialize random dictionary.
+`/ttrp init` - wipe and reinitialize random dictionary. \
 `/ttrp test` - prints TRRP message, depending on mode.
 
 `/ThankTheResserPlus` can be used instead of `/trrp` if you are not bored typing SO long in console while the fight engulfed around.
