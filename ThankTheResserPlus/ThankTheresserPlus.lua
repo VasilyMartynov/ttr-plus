@@ -11,7 +11,10 @@ end
 --Prints out the usage message
 function ThankTheResserPlus.PrintUsage()
 	print("")
-	print("ThankTheResserPlus usage:")
+	print("ThankTheResserPlus")
+	print(" v1.3.0 stable")
+	print("")
+	print("Usage:")
 	print("/ttrp off - turns Thank The Resser off")
 	print("/ttrp on  - turns Thank The Resser on")
 	print("")
@@ -20,11 +23,15 @@ function ThankTheResserPlus.PrintUsage()
 	print("/ttrp random - sets the mode to random pregenerated set of messages.")
 	print("    Custom phrases coming sometime, maybe.")
 	print("")
-	print("/ttrp <phrase> - sets thanks phrase upon ressurection")
-	print("    Use %p to insert the ressurecter's name")
+	print("/ttrp <phrase> - sets thanks phrase upon resurrection")
+	print("    Use %p to insert the resurrector's name")
 	print("")
 	print("/ttrp init - wipe and reinitialize random dictionary.")
 	print("/ttrp test - prints TRRP message, depending on mode.")
+	print("")
+	print("To add custom phrases Edit ThankTheResserPlus.Dictionary variable in folder")
+	print("%game_root%\user\settings\Martyrs Square\%username%\%char_name%\ThankTheResserPlus\SavedVariables.lua")
+	print("Better do it before you start the game.")
 	print("")
 	print("/ThankTheResserPlus can be used instead of /trrp if you are not bored typing.")
 	
@@ -62,7 +69,7 @@ function ThankTheResserPlus.Initialize()
 	--Listens for for the player to accept ressurection and calls ThankTheResserPlus.ThankThem function
 	RegisterEventHandler(SystemData.Events.RESURRECTION_ACCEPT, "ThankTheResserPlus.ThankThem")
 	--Debug mode 
-	RegisterEventHandler(SystemData.Events.PLAYER_BEGIN_CAST, "ThankTheResserPlus.ThankThem")
+	--RegisterEventHandler(SystemData.Events.PLAYER_BEGIN_CAST, "ThankTheResserPlus.ThankThem")
 	RegisterEventHandler(SystemData.Events.PLAYER_DEATH_CLEARED, "ThankTheResserPlus.ResserName")
 
 end
@@ -143,7 +150,7 @@ end
 
 --After a sucessfull ressurection this function is called
 function ThankTheResserPlus.ThankThem()
-
+	
 	if DoesWindowExist("TwoButtonDlg1Box") then
 		RessText = LabelGetText("TwoButtonDlg1BoxText")
 		RessName = RessText:match(L"([%a]+).")
@@ -152,10 +159,17 @@ function ThankTheResserPlus.ThankThem()
 	local ColorName = L"<LINK data=\"0\" text=\""..towstring(RessName)..L" \" color=\"25,155,255\">"
 	ressPhrase = ThankTheResserPlus.GetRessPhrase()
 	
+	-- Original mod way
 	--local sayword = ThankTheResserPlus.Settings.Word:gsub(L"%%[Pp]", ColorName)
-	local sayword = ressPhrase:gsub(L"%%[Pp]", ColorName)
+	
 	--Sends the message to chat :
-	SendChatText(towstring("/say ")..sayword, L"")
+	-- REMinder, convert any string to wstring type of special encoding
+	local sayword = towstring(ressPhrase):gsub(L"%%[Pp]", ColorName)
+	
+	if ThankTheResserPlus.Settings.Enabled then
+		SendChatText(towstring("/say ")..sayword, L"")
+	end
+	
 end
 
 
@@ -166,6 +180,7 @@ function ThankTheResserPlus.Randomize()
 	res = ThankTheResserPlus.Dictionary
 	return res[ math.random ( 1, #res ) ]
 end
+
 
 -- Gets the thanks phrase dependat on mode
 function ThankTheResserPlus.GetRessPhrase()
@@ -180,7 +195,7 @@ function ThankTheResserPlus.GetRessPhrase()
 end
 
 
--- Debug section fo online lua tests
+-- Debug section for online lua tests
 
 -- Test random output
 --ThankTheResserPlus.Initialize()
