@@ -8,7 +8,9 @@ Be grateful for people who spend a second to resurrect your pitiful body.
 
 ## Installation
 
-Copy `./ThankTheResserPlus` directory to your game addons folder (`./Warhammer Online - Return of Reckoning/Interface/AddOns/`).
+- Download [ttr-plus-main.zip](https://github.com/VasilyMartynov/ttr-plus/archive/main.zip).
+- Extract.
+- Copy `./ThankTheResserPlus` directory to your game addons folder (`./Warhammer Online - Return of Reckoning/Interface/AddOns/`).
 
 ## Usage
 
