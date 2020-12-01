@@ -52,4 +52,4 @@ Many thanks to [Warhammer Return of Reckoning Team ](https://www.returnofreckoni
 
 Tools and addon Library of [Idrinth](https://tools.idrinth.de/)
 
-Original Author of the Mod - Sullemunk
+Original Author of the Mod - [Sullemunk](https://www.returnofreckoning.com/forum/memberlist.php?mode=viewprofile&u=2352&sid=758cea67751329ca1d59fe277076c17d)
