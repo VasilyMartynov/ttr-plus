@@ -4,7 +4,10 @@ Warhammer Online - Return of Reckoning Add-on
 
 Thank The Resser Plus.
 
-Be grateful for people who spend a second to resurrect your pitiful body.
+## Features
+
+- Automatically thanks the person that revived you in /say, optionally addressing them by name (same as the original addon).
+- Allows setting up multiple phrases to be picked at random (new feature!)
 
 ## Installation
 
