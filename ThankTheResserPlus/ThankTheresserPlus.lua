@@ -1,6 +1,16 @@
 --Written with inspiration from ThankTheHealer, for RoR by Sullemunk.
 -- Upgraded by Archam for Return Of Reckoning.
+
+-- This is global
 ThankTheResserPlus = {}
+
+ThankTheResserPlus.Version = "1.4.0"
+
+ThankTheResserPlus.defaultSettings={
+	Enabled = false,
+	Mode = "word",
+}
+local ttrp = ThankTheResserPlus
 
 
 local function print(text)
@@ -9,10 +19,10 @@ end
 
 
 --Prints out the usage message
-function ThankTheResserPlus.PrintUsage()
+function ttrp.PrintUsage()
 	print("")
 	print("ThankTheResserPlus")
-	print(" v1.3.0 stable")
+	print(ttrpVersion)
 	print("")
 	print("Usage:")
 	print("/ttrp off - turns Thank The Resser off")
@@ -35,21 +45,18 @@ function ThankTheResserPlus.PrintUsage()
 	print("")
 	print("/ThankTheResserPlus can be used instead of /trrp if you are not bored typing.")
 	
-	if (ThankTheResserPlus.Settings.Word ~= nil) then
-		print(towstring("Current phrase is \"")..ThankTheResserPlus.Settings.Word..towstring("\"."))
+	if (ttrp.Settings.Word ~= nil) then
+		print(towstring("Current phrase is \"")..ttrp.Settings.Word..towstring("\"."))
 	end
 end
 
 
 --This function is beeing called when the addon starts from ThankTheResserPlus.mod
 function ThankTheResserPlus.Initialize()
-	if (ThankTheResserPlus.Settings == nil) then
-		ThankTheResserPlus.Settings = {}
-		--Init options list
-		ThankTheResserPlus.Settings.Enabled = false
-		-- 
-		ThankTheResserPlus.Settings.Mode = "word"
-		ThankTheResserPlus.InitDictionary()
+
+	if (ttrp.Settings == nil) then
+		ttrp.Settings = ttrp.defaultSettings
+		ttrp.InitDictionary()
 	end
 
 	--Checks if Libslash is installed
@@ -59,11 +66,12 @@ function ThankTheResserPlus.Initialize()
 	end
 
 	--Registers the /slash commands 
-	LibSlash.RegisterSlashCmd("ThankTheResserPlus", function(input) ThankTheResserPlus.Command(input) end)
-	LibSlash.RegisterSlashCmd("ttrp", function(input) ThankTheResserPlus.Command(input) end)
+	LibSlash.RegisterSlashCmd("ThankTheResserPlus", function(input) ttrp.Command(input) end)
+	LibSlash.RegisterSlashCmd("ttrp", function(input) ttrp.Command(input) end)
 
 	--Prints out that the mod is loaded	
-	print("<icon00057> Thank the resser Plus 1.3 Loaded.")
+	print("<icon00057> Thank the Resser Plus Loaded.")
+	--print("<icon00057> Thank the Resser Plus"..towstring(ttrp.Version)..L"Loaded.")
 	print("Use /ttrp or /ThankTheResserPlus")
 
 	--Listens for for the player to accept ressurection and calls ThankTheResserPlus.ThankThem function
@@ -71,16 +79,17 @@ function ThankTheResserPlus.Initialize()
 	--Debug mode 
 	--RegisterEventHandler(SystemData.Events.PLAYER_BEGIN_CAST, "ThankTheResserPlus.ThankThem")
 	RegisterEventHandler(SystemData.Events.PLAYER_DEATH_CLEARED, "ThankTheResserPlus.ResserName")
-
+	
+	ttrp.InitConfig()
 end
 
 
 --Inits local dictionary with pregenrated ressurection phrases 
-function ThankTheResserPlus.InitDictionary()
-	if (ThankTheResserPlus.Dictionary == nil) then
+function ttrp.InitDictionary()
+	if (ttrp.Dictionary == nil) then
 		-- Custom strins can be added here
-		ThankTheResserPlus.Dictionary = {}
-		ThankTheResserPlus.Dictionary = {
+		ttrp.Dictionary = {}
+		ttrp.Dictionary = {
 			"Thank you!",
 			"Cheers %p!",
 			"Ressurection appreciated.",
@@ -94,7 +103,7 @@ end
 
 
 --Unregister the /slash commands if the mod is turned off so it can be used by other addons (not likely)
-function ThankTheResserPlus.Shutdown()
+function ttrp.Shutdown()
 	UnregisterEventHandler(SystemData.Events.RESURRECTION_ACCEPT, "ThankTheResserPlus.ThankThem")
 	LibSlash.UnregisterSlashCmd("ttrp")
 	LibSlash.UnregisterSlashCmd("ThankTheResserPlus")
@@ -103,44 +112,46 @@ end
 
 --Listens for the /slash command from the textbox. 
 -- If no additional text is applied to set the word, the usage message is shown
-function ThankTheResserPlus.Command(input)
+function ttrp.Command(input)
 	--input = string.lower(input)
 	if (input == "") then
-		ThankTheResserPlus.PrintUsage()
+		ttrp.PrintUsage()
 		return
 	end
 
 	--Turns the addon on/off
 	if (input == "off") then
-		ThankTheResserPlus.Settings.Enabled = false
+		ttrp.Settings.Enabled = false
 		print("Thank The Resser disabled")
 	elseif (input == "on") then 
-		ThankTheResserPlus.Settings.Enabled = true
+		ttrp.Settings.Enabled = true
 		print("Thank The Resser Plus enabled")
 	--Controls work mode
 	elseif (input == "random") then 
-		ThankTheResserPlus.Settings.Mode = "Random"
-		print("TRRP mode set to "..ThankTheResserPlus.Settings.Mode)
+		ttrp.Settings.Mode = "Random"
+		print("TRRP mode set to "..ttrp.Settings.Mode)
 	elseif (input == "word") then 
-		ThankTheResserPlus.Settings.Mode = "Word"
-		print("TRRP mode set to "..ThankTheResserPlus.Settings.Mode)
+		ttrp.Settings.Mode = "Word"
+		print("TRRP mode set to "..ttrp.Settings.Mode)
 	elseif (input == "mode") then 
-		print("Thank The Resser Plus current mode: "..ThankTheResserPlus.Settings.Mode )
+		print("Thank The Resser Plus current mode: "..ttrp.Settings.Mode )
 	--reinits Dictionary
 	elseif (input == "init") then
-		ThankTheResserPlus.InitDictionary()
+		ttrp.InitDictionary()
 		print("Dictionary wiped and reinitialized.")
 	elseif (input == "test") then 
-		print(ThankTheResserPlus.GetRessPhrase())
+		print(ttrp.GetRessPhrase())
+	elseif (input == "ui") then 
+		ttrp.DoConfig()
 	else
-		ThankTheResserPlus.Settings.Word = towstring(input)
-		print(towstring("TRRP phrase set to \"")..ThankTheResserPlus.Settings.Word..towstring("\"."))
+		ttrp.Settings.Word = towstring(input)
+		print(towstring("TRRP phrase set to \"")..ttrp.Settings.Word..towstring("\"."))
 	end
 end
 
 
 -- Mostly magical function that extracts Resser name form ressurection dialog window
-function ThankTheResserPlus.ResserName()
+function ttrp.ResserName()
 	if DoesWindowExist("TwoButtonDlg1Box") then
 		RessText = LabelGetText("TwoButtonDlg1BoxText")
 		RessName = RessText:match(L"([%a]+).")
@@ -149,24 +160,24 @@ function ThankTheResserPlus.ResserName()
 end
 
 --After a sucessfull ressurection this function is called
-function ThankTheResserPlus.ThankThem()
+function ttrp.ThankThem()
 	
 	if DoesWindowExist("TwoButtonDlg1Box") then
 		RessText = LabelGetText("TwoButtonDlg1BoxText")
 		RessName = RessText:match(L"([%a]+).")
 	end
 	
-	local ColorName = L"<LINK data=\"0\" text=\""..towstring(RessName)..L" \" color=\"25,155,255\">"
-	ressPhrase = ThankTheResserPlus.GetRessPhrase()
+	local ColorName = L"<LINK data=\"0\" text=\""..towstring(RessName)..L"\" color=\"25,155,255\">"
+	ressPhrase = ttrp.GetRessPhrase()
 	
 	-- Original mod way
-	--local sayword = ThankTheResserPlus.Settings.Word:gsub(L"%%[Pp]", ColorName)
+	--local sayword = ttrp.Settings.Word:gsub(L"%%[Pp]", ColorName)
 	
 	--Sends the message to chat :
 	-- REMinder, convert any string to wstring type of special encoding
 	local sayword = towstring(ressPhrase):gsub(L"%%[Pp]", ColorName)
 	
-	if ThankTheResserPlus.Settings.Enabled then
+	if ttrp.Settings.Enabled then
 		SendChatText(towstring("/say ")..sayword, L"")
 	end
 	
@@ -174,20 +185,20 @@ end
 
 
 -- Returns a random element of table
-function ThankTheResserPlus.Randomize()
+function ttrp.Randomize()
     -- a bit of overkill
     --math.randomseed(os.time())
-	res = ThankTheResserPlus.Dictionary
+	res = ttrp.Dictionary
 	return res[ math.random ( 1, #res ) ]
 end
 
 
 -- Gets the thanks phrase dependat on mode
-function ThankTheResserPlus.GetRessPhrase()
-	if (ThankTheResserPlus.Settings.Mode == "Word") then
-		res = ThankTheResserPlus.Settings.Word
-	elseif (ThankTheResserPlus.Settings.Mode == "Random") then
-		res = ThankTheResserPlus.Randomize()
+function ttrp.GetRessPhrase()
+	if (ttrp.Settings.Mode == "Word") then
+		res = ttrp.Settings.Word
+	elseif (ttrp.Settings.Mode == "Random") then
+		res = ttrp.Randomize()
 	else
 		res = "Ressurection Gratitude is provided by ThankTheResserPlus addon."
 	end

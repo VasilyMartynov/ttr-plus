@@ -1,0 +1,423 @@
+<Interface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Interface.xsd">
+  <!--
+    IraConfig ((Lib) Ira Config) version 1.03
+    by Irinia of Volkmar
+    This library manages a configuaration window for add-ons, as well as providing many utillity functions for controls
+  -->
+  <Windows>
+    <!-- =========================================
+    TabSet Stuff
+    ========================================== -->
+    <Button name="IraConfigTab" inherits="EA_Button_Tab">
+      <Size>
+        <AbsPoint x="200" y="35" />
+      </Size>
+      <EventHandlers>
+        <EventHandler event="OnLButtonUp" function="IraConfig.OnLButtonUpTab" />
+        <EventHandler event="OnMouseOver" function="IraConfig.OnMouseOverTab" />
+      </EventHandlers>
+      <TextOffset x="0" y="0" />
+    </Button>
+
+    <Window name="IraConfigTabLine">
+      <Size>
+        <AbsPoint x="500" y="37"/>
+      </Size>
+      <Windows>
+        <DynamicImage name="$parentLeftCorner" texture="shared_01" handleinput="false" layer="background" sticky="false">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="bottomleft"/>
+          </Anchors>
+          <Size>
+              <AbsPoint x="9" y="6" />
+          </Size>
+          <TexCoords x="389" y="56" />
+        </DynamicImage>
+        <DynamicImage name="$parentLeftDoink" texture="shared_01" handleinput="false" layer="background" sticky="false">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft"/>
+          </Anchors>
+          <Size>
+              <AbsPoint x="9" y="14" />
+          </Size>
+          <TexCoords x="389" y="62" />
+        </DynamicImage>
+        <HorizontalResizeImage name="$parentSepLeft" inherits="EA_HorizontalResizeImage_TabSeparatorMiddle" layer="default">
+          <Size>
+              <AbsPoint x="0" y="5" />
+          </Size>
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="bottomleft">
+              <AbsPoint x="7" y="0" />
+            </Anchor>
+          </Anchors>
+        </HorizontalResizeImage>
+        <HorizontalResizeImage name="$parentSepRight" inherits="EA_HorizontalResizeImage_TabSeparatorMiddle" layer="default">
+          <Anchors>
+            <Anchor point="bottomright" relativePoint="bottomright">
+              <AbsPoint x="-8" y="0" />
+            </Anchor>
+            <Anchor point="bottomright" relativePoint="bottomleft" relativeTo="$parentSepLeft">
+              <AbsPoint x="0" y="0" />
+            </Anchor>
+          </Anchors>
+        </HorizontalResizeImage>
+        <DynamicImage name="$parentRightCorner" texture="shared_01" handleinput="false" layer="background" sticky="false">
+          <Anchors>
+            <Anchor point="bottomright" relativePoint="bottomright"/>
+          </Anchors>
+          <Size>
+              <AbsPoint x="9" y="6" />
+          </Size>
+          <TexCoords x="401" y="56" />
+        </DynamicImage>
+        <DynamicImage name="$parentRightDoink" texture="shared_01" handleinput="false" layer="background" sticky="false">
+          <Anchors>
+            <Anchor point="bottomright" relativePoint="topright"/>
+          </Anchors>
+          <Size>
+              <AbsPoint x="9" y="14" />
+          </Size>
+          <TexCoords x="401" y="62" />
+        </DynamicImage>
+      </Windows>
+    </Window>
+
+    <!-- =========================================
+    Config window stuff
+    ========================================== -->
+    <ScrollWindow name="IraConfigScrollTab" childscrollwindow="$parentChild" scrollbar="$parentScroll" lineheight="18">
+      <Anchors>
+        <Anchor point="topleft" relativePoint="topleft"/>
+        <Anchor point="bottomright" relativePoint="bottomright"/>
+      </Anchors>
+      <Windows>
+        <VerticalScrollbar name="$parentScroll" inherits="EA_ScrollBar_DefaultVerticalChain" layer="popup">
+          <Anchors>
+            <Anchor point="topright" relativePoint="topright" />
+            <Anchor point="bottomright" relativePoint="bottomright">
+              <AbsPoint x="0" y="-1"/>
+            </Anchor>
+          </Anchors>
+        </VerticalScrollbar>
+
+        <Window name="$parentChild"/>
+      </Windows>
+    </ScrollWindow>
+
+    <Window name="IraConfig" movable="true" layer="secondary" inherits="EA_Window_Default" savesettings="true">
+      <Size>
+        <AbsPoint x="550" y="600" />
+      </Size>
+      <Anchors>
+          <Anchor point="center" relativePoint="center" />
+      </Anchors>
+      <Windows>
+        <Window name="$parentBackground" inherits="EA_Window_DefaultBackgroundFrame" />
+        <Window name="$parentTitleBar" inherits="EA_TitleBar_Default" />                   
+        <DynamicImage name="$parentWindowImage"  inherits="EA_Default_CornerImage" layer="secondary" texture="EA_CornerIcon_CustomizeUI"/>    
+        <Button name="$parentClose" inherits="EA_Button_DefaultWindowClose" >
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.Close" />
+          </EventHandlers>
+        </Button>      
+        
+        <!--Buttons-->                        
+        <Window name="$parentButtonBackground" inherits="EA_Window_DefaultButtonBottomFrame" layer="background" />
+        
+        <Button name="$parentOkayButton" inherits="EA_Button_DefaultResizeable">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="bottomleft">
+              <AbsPoint x="10" y="-12" />
+            </Anchor>
+          </Anchors>
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.OnOkay" />
+          </EventHandlers>
+        </Button>
+        <Button name="$parentApplyButton" inherits="EA_Button_DefaultResizeable">
+          <Anchors>
+            <Anchor point="bottomright" relativePoint="bottomleft" relativeTo="$parentOkayButton">
+              <AbsPoint x="4" y="0" />
+            </Anchor>
+          </Anchors>
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.OnApply" />
+          </EventHandlers>
+        </Button>
+        <Button name="$parentResetButton" inherits="EA_Button_DefaultResizeable">
+          <Anchors>
+            <Anchor point="bottomright" relativePoint="bottomleft" relativeTo="$parentApplyButton">
+              <AbsPoint x="4" y="0" />
+            </Anchor>
+          </Anchors>
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.OnReset" />
+          </EventHandlers>
+        </Button>
+        <Button name="$parentCancelButton" inherits="EA_Button_DefaultResizeable" >
+          <Anchors>
+            <Anchor point="bottomright" relativePoint="bottomleft" relativeTo="$parentResetButton">
+              <AbsPoint x="4" y="0" />
+            </Anchor>
+          </Anchors>
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.Close" />
+          </EventHandlers>
+        </Button>           
+
+        <Window name="$parentTabs">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentTitleBar"/>
+            <Anchor point="bottomright" relativePoint="topright" relativeTo="$parentTitleBar"/>
+          </Anchors>
+        </Window>            
+
+        <Window name="$parentClient">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentTabs">
+              <AbsPoint x="8" y="0"/>
+            </Anchor>
+            <Anchor point="topright" relativePoint="bottomright" relativeTo="$parentButtonBackground">
+              <AbsPoint x="-8" y="12"/>
+            </Anchor>
+          </Anchors>
+        </Window>            
+      </Windows>
+    </Window>
+
+    <!-- =========================================
+    Spinner control support
+    ========================================== -->
+    <EditBox name="IraConfigNumEdit" scrolling="none" input="numbers" font="font_default_text" background="EA_FullResizeImage_TanBorder" maxChars="3">
+      <Size>
+        <AbsPoint x="50" y="32" />
+      </Size>
+      <TextOffset x="3" y="4" />
+    </EditBox>
+
+    <EditBox name="IraConfigNumSpin" inherits="IraConfigNumEdit">
+      <EventHandlers>
+        <EventHandler event="OnTextChanged" function="IraConfig.SpinnerChange"/>
+      </EventHandlers>
+    </EditBox>
+    
+    <Window name="IraConfigSpinner">
+      <Size>
+        <AbsPoint x="18" y="36"/>
+      </Size>
+      <Windows>
+        <Button name="$parentButtonPlus" inherits="EA_Button_DefaultPlus">
+          <Anchors>
+            <Anchor point="left" relativePoint="bottomleft"/>
+          </Anchors>
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.SpinnerPlus" />
+          </EventHandlers>
+        </Button>
+
+        <Button name="$parentButtonMinus" inherits="EA_Button_DefaultMinus">
+          <Anchors>
+            <Anchor point="left" relativePoint="topleft"/>
+          </Anchors>
+          <EventHandlers>
+            <EventHandler event="OnLButtonUp" function="IraConfig.SpinnerMinus" />
+          </EventHandlers>
+        </Button>
+      </Windows>
+    </Window>
+    <!-- =========================================
+    Context help system
+    ========================================== -->
+    <Window name="IraConfigHelpTip" layer="overlay" handleinput="false">
+      <Anchors>
+        <Anchor point="center" relativePoint="topleft">
+          <AbsPoint x="-150" y="-100"/>
+        </Anchor>
+      </Anchors>
+      <Size>
+        <AbsPoint x="300" y="100"/>
+      </Size>
+      <Windows>
+        <Window name="$parentBackground" inherits="EA_Window_DefaultTooltipBackground">
+          <Anchors>
+            <Anchor point="topleft" relativePoint="topleft" />
+            <Anchor point="bottomright" relativePoint="bottomright"/>
+          </Anchors>
+        </Window>
+        <Label name="$parentLabel" font="font_clear_default" sticky="false" wordwrap="true" autoresize="true">
+          <Size>
+            <AbsPoint x="50" y="25"/>
+          </Size>
+          <Anchors>
+            <Anchor point="topleft" relativePoint="topleft">
+              <AbsPoint x="10" y="10"/>
+            </Anchor>
+            <Anchor point="topright" relativePoint="topright">
+              <AbsPoint x="-10" y="10"/>
+            </Anchor>
+          </Anchors>
+        </Label>
+      </Windows>
+      <EventHandlers>
+        <EventHandler event="OnUpdate" function="IraConfig.HelpCheckMouseOut" />
+      </EventHandlers>
+    </Window>
+    <Window name="IraConfigHelpCanvas" layer="overlay" alpha=".3">
+      <Anchors>
+        <Anchor point="topleft" relativePoint="topleft" />
+        <Anchor point="bottomright" relativePoint="bottomright" />
+      </Anchors>
+      <EventHandlers>
+        <EventHandler event="OnLButtonUp" function="IraConfig.HelpClickedCanvas" />
+      </EventHandlers>
+      <Windows>
+        <FullResizeImage name="$parentIraConfigHelpBG" inherits="EA_FullResizeImage_TintableSolidBackground" layer="background" handleinput="false">
+          <Anchors>
+            <Anchor point="topleft" relativePoint="topleft" />
+            <Anchor point="bottomright" relativePoint="bottomright" />
+          </Anchors>
+          <TintColor r="0" g="0" b="0" />
+        </FullResizeImage>
+      </Windows>
+    </Window>
+    <FullResizeImage name="IraConfigHelpSpot" inherits="EA_FullResizeImage_TintableSolidBackground" handleinput="true" alpha="1">
+      <EventHandlers>
+        <EventHandler event="OnLButtonUp" function="IraConfig.HelpClickedSpot" />
+      </EventHandlers>
+    </FullResizeImage>
+    <Button name="IraConfigHelpBtn" font="font_clear_medium_bold" inherits="EA_Button_Default" backgroundtexture="shared_01" highlighttexture="shared_01" layer="popup">
+      <Size>
+        <AbsPoint x="26" y="26" />
+      </Size>
+      <TexCoords>
+        <Normal x="168" y="43" />
+        <NormalHighlit x="168" y="69" />
+        <Pressed x="168" y="95" />
+        <PressedHighlit x="168" y="95" />
+        <Disabled x="142" y="95" />
+      </TexCoords>
+      <EventHandlers>
+        <EventHandler event="OnInitialize" function="IraConfig.HelpBtnInit"/>
+      </EventHandlers>
+    </Button>
+
+    <!-- =========================================
+    Useful definitions
+    ========================================== -->
+    <Label name="IraConfigLabel" font="font_clear_medium">
+      <Size>
+        <AbsPoint x="250" y="22"/>
+      </Size>
+    </Label>
+    
+    <Label name="IraConfigHeading" font="font_clear_medium_bold">
+      <Size>
+        <AbsPoint x="500" y="22"/>
+      </Size>
+    </Label>
+
+    <Button name="IraConfigComboItem" font="font_clear_medium"  textalign="left">
+      <Size>
+        <AbsPoint x="220" y="23" />
+      </Size>
+      <TextColors>
+        <Normal r="255" g="255" b="255" a="255" />
+        <NormalHighlit r="250" g="213" b="63" a="255" />
+        <Pressed r="250" g="213" b="63" a="255" />
+        <PressedHighlit r="250" g="213" b="63" a="255" />
+        <Disabled r="92" g="92" b="92" a="255" />
+      </TextColors>
+      <ResizeImages>
+        <NormalHighlit def="EA_FullResizeImage_RedTransparent" />
+      </ResizeImages>
+      <TextOffset x="1" y="1" />
+    </Button>
+
+    <Button name="IraConfigComboMain" backgroundtexture="shared_01" highlighttexture="shared_01" font="font_clear_medium" textalign="left" overlaytexture="shared_01" overlayhighlighttexture="shared_01">
+      <Size>
+        <AbsPoint x="250" y="29" />
+      </Size>
+      <TextColors>
+        <Normal r="255" g="255" b="255" a="255" />
+        <NormalHighlit r="250" g="213" b="63" a="255" />
+        <Pressed r="250" g="213" b="63" a="255" />
+        <PressedHighlit r="250" g="213" b="63" a="255" />
+        <Disabled r="92" g="92" b="92" a="255" />
+      </TextColors>
+      <ResizeImages>
+        <Normal def="EA_HorizontalResizeImage_DefaultComboBox"  />
+        <NormalHighlit def="EA_HorizontalResizeImage_DefaultComboBox" />
+        <Pressed def="EA_HorizontalResizeImage_DefaultComboBox" />
+        <PressedHighlit def="EA_HorizontalResizeImage_DefaultComboBox" />
+        <Disabled def="EA_HorizontalResizeImage_DefaultComboBox" />
+      </ResizeImages>
+      <OverlaySize x="27" y="28" />
+      <OverlayOffset x="223" y="0" />
+      <OverlayTexCoords>
+        <Normal x="0" y="28" />
+        <NormalHighlit x="27" y="28" />
+        <Pressed x="0" y="56" />
+        <PressedHighlit x="0" y="56" />
+        <Disabled x="27" y="56" />
+      </OverlayTexCoords>
+      <TextOffset x="5" y="5" />
+    </Button>
+
+    <ComboBox name="IraConfigCombo" selectedbutton="IraConfigComboMain" menubackground="EA_Window_ComboBoxMenuBackground" menuitembutton="IraConfigComboItem" scrollbar="EA_ScrollBar_DefaultVerticalChain" maxvisibleitems="6">
+      <Size>
+        <AbsPoint x="250" y="29" />
+      </Size>
+      <MenuButtonOffset x="5" y="5" />
+    </ComboBox>
+
+    <Window name="IraConfigCheckBox">
+      <Size>
+        <AbsPoint x="500" y="22" />
+      </Size>
+      <EventHandlers>
+        <EventHandler event="OnInitialize" function="EA_LabelCheckButton.Initialize"/>
+        <EventHandler event="OnLButtonUp" function="EA_LabelCheckButton.Toggle"/>
+      </EventHandlers>
+      <Windows>
+        <Button name="$parentButton" inherits="EA_Button_DefaultCheckBox" handleinput="false">
+          <Anchors>
+            <Anchor point="left" relativePoint="left" />
+          </Anchors>
+        </Button>
+        <Label name="$parentLabel" font="font_clear_medium" autoresize="true" maxchars="120" textalign="left" handleinput="false" layer="background">
+          <Size>
+            <AbsPoint x="470" y="16" />
+          </Size>
+          <Anchors>
+            <Anchor point="right" relativePoint="left" relativeTo="$parentButton">
+              <AbsPoint x="5" y="0" />
+            </Anchor>
+          </Anchors>
+          <Color r="255" g="255" b="255" a="255" />
+        </Label>
+      </Windows>
+    </Window>
+
+    <!-- For embedded tabsets (U shaped frame with no top or background -->
+    <FullResizeImage name="IraConfigUFrame" handleinput="false" layer="background" texture="shared_01" frameonly="true">
+      <Sizes>
+        <TopLeft x="11" y="0" />
+        <BottomRight x="11" y="19" />
+        <Middle x="91" y="75" />
+      </Sizes>
+      <TexCoords>
+        <TopLeft x="311" y="54" />
+        <TopCenter x="322" y="52" />
+        <TopRight x="413" y="54" />
+        <MiddleLeft x="311" y="54" />
+        <MiddleCenter x="322" y="52" />
+        <MiddleRight x="413" y="54" />
+        <BottomLeft x="311" y="129" />
+        <BottomCenter x="322" y="129" />
+        <BottomRight x="413" y="129" />
+      </TexCoords>
+    </FullResizeImage>
+
+  </Windows>
+</Interface>

@@ -1,0 +1,35 @@
+<Interface xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Interface.xsd">
+  <Windows>
+
+    <Window name="TTRPConfig">
+      <Size>
+        <AbsPoint x="500" y="200"/>
+      </Size>
+      
+	  <Windows>
+
+        <Label name="$parentVersion">
+          <Anchors>
+            <Anchor point="topleft" relativePoint="topleft">
+              <AbsPoint x="0" y="0" />
+            </Anchor>
+          </Anchors>
+          <Size>
+            <AbsPoint x="450" y="25"/>
+          </Size>
+        </Label>
+		
+        <Window name="$parentEnabled" inherits="IraConfigCheckBox">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentVersion">
+              <AbsPoint x="0" y="10" />
+            </Anchor>
+          </Anchors>
+		</Window>
+      
+	  </Windows>
+	  
+    </Window>
+
+  </Windows>
+</Interface>
