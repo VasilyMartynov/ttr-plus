@@ -145,7 +145,7 @@ function ttrp.Command(input)
 		ttrp.DoConfig()
 	else
 		ttrp.Settings.Word = towstring(input)
-		print(towstring("TRRP phrase set to \"")..ttrp.Settings.Word..towstring("\"."))
+		print(towstring("TRRP phrase is set to \"")..ttrp.Settings.Word..towstring("\"."))
 	end
 end
 
@@ -159,7 +159,7 @@ function ttrp.ResserName()
 	end
 end
 
---After a sucessfull ressurection this function is called
+--After a successful resurrection this function is called
 function ttrp.ThankThem()
 	
 	if DoesWindowExist("TwoButtonDlg1Box") then
@@ -200,7 +200,7 @@ function ttrp.GetRessPhrase()
 	elseif (ttrp.Settings.Mode == "Random") then
 		res = ttrp.Randomize()
 	else
-		res = "Ressurection Gratitude is provided by ThankTheResserPlus addon."
+		res = "Resurrection Gratitude is provided by ThankTheResserPlus addon."
 	end
 	return res
 end

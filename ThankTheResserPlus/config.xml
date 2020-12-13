@@ -8,7 +8,7 @@
       
 	  <Windows>
 
-        <Label name="$parentVersion">
+        <Label name="$parentVersion" inherits="IraConfigLabel">
           <Anchors>
             <Anchor point="topleft" relativePoint="topleft">
               <AbsPoint x="0" y="0" />
@@ -22,14 +22,54 @@
         <Window name="$parentEnabled" inherits="IraConfigCheckBox">
           <Anchors>
             <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentVersion">
-              <AbsPoint x="0" y="10" />
+              <AbsPoint x="0" y="5" />
             </Anchor>
           </Anchors>
 		</Window>
-      
+
+        <Label name="$parentAboutWord" inherits="IraConfigLabel" >
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentEnabled">
+              <AbsPoint x="0" y="10" />
+            </Anchor>
+          </Anchors>
+          <Size>
+            <AbsPoint x="450" y="25"/>
+          </Size>
+        </Label>
+
+        <Window name="$parentWordBlock">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentAboutWord">
+              <AbsPoint x="0" y="15"/>
+            </Anchor>
+          </Anchors>
+
+          <EditBox name="$parentWordEdit" font="font_chat_text" background="EA_FullResizeImage_TanBorder" scrolling="none" maxChars="64" align="center">
+            <Size>
+              <AbsPoint x="50" y="32" />
+            </Size>
+            <TextOffset x="3" y="4" />
+            <Anchor point="topleft" relativePoint="topleft" relativeTo="$parentWordBlock">
+              <AbsPoint x="0" y="20"/>
+            </Anchor>
+          </EditBox>
+
+        </Window>
+
+        <Label name="$parentAboutDict" inherits="IraConfigLabel">
+          <Anchors>
+            <Anchor point="bottomleft" relativePoint="topleft" relativeTo="$parentWordBlock">
+              <AbsPoint x="0" y="25" />
+            </Anchor>
+          </Anchors>
+          <Size>
+            <AbsPoint x="450" y="25"/>
+          </Size>
+        </Label>
 	  </Windows>
-	  
-    </Window>
+
+   </Window>
 
   </Windows>
 </Interface>
