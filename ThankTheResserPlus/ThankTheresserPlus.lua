@@ -12,7 +12,7 @@ end
 function ThankTheResserPlus.PrintUsage()
 	print("")
 	print("ThankTheResserPlus")
-	print(" v1.3.0 stable")
+	print(" v1.3.1 stable")
 	print("")
 	print("Usage:")
 	print("/ttrp off - turns Thank The Resser off")
@@ -41,7 +41,7 @@ function ThankTheResserPlus.PrintUsage()
 end
 
 
---This function is beeing called when the addon starts from ThankTheResserPlus.mod
+--This function is being called when the addon starts from ThankTheResserPlus.mod
 function ThankTheResserPlus.Initialize()
 	if (ThankTheResserPlus.Settings == nil) then
 		ThankTheResserPlus.Settings = {}
@@ -63,10 +63,10 @@ function ThankTheResserPlus.Initialize()
 	LibSlash.RegisterSlashCmd("ttrp", function(input) ThankTheResserPlus.Command(input) end)
 
 	--Prints out that the mod is loaded	
-	print("<icon00057> Thank the resser Plus 1.3 Loaded.")
+	print("<icon00057> Thank the Resser Plus 1.3 Loaded.")
 	print("Use /ttrp or /ThankTheResserPlus")
 
-	--Listens for for the player to accept ressurection and calls ThankTheResserPlus.ThankThem function
+	--Listens for for the player to accept resurrection and calls ThankTheResserPlus.ThankThem function
 	RegisterEventHandler(SystemData.Events.RESURRECTION_ACCEPT, "ThankTheResserPlus.ThankThem")
 	--Debug mode 
 	--RegisterEventHandler(SystemData.Events.PLAYER_BEGIN_CAST, "ThankTheResserPlus.ThankThem")
@@ -75,15 +75,15 @@ function ThankTheResserPlus.Initialize()
 end
 
 
---Inits local dictionary with pregenrated ressurection phrases 
+--Inits local dictionary with pregenerated resurrection phrases
 function ThankTheResserPlus.InitDictionary()
 	if (ThankTheResserPlus.Dictionary == nil) then
-		-- Custom strins can be added here
+		-- Custom strings can be added here
 		ThankTheResserPlus.Dictionary = {}
 		ThankTheResserPlus.Dictionary = {
 			"Thank you!",
 			"Cheers %p!",
-			"Ressurection appreciated.",
+			"Resurrection appreciated.",
 			"%p, I owe you.",
 			"You are breathtaking <3 !",
 			"Next one is on me, %p!"
@@ -139,7 +139,7 @@ function ThankTheResserPlus.Command(input)
 end
 
 
--- Mostly magical function that extracts Resser name form ressurection dialog window
+-- Mostly magical function that extracts Resser name form resurrection dialog window
 function ThankTheResserPlus.ResserName()
 	if DoesWindowExist("TwoButtonDlg1Box") then
 		RessText = LabelGetText("TwoButtonDlg1BoxText")
@@ -148,7 +148,7 @@ function ThankTheResserPlus.ResserName()
 	end
 end
 
---After a sucessfull ressurection this function is called
+--After a successful resurrection this function is called
 function ThankTheResserPlus.ThankThem()
 	
 	if DoesWindowExist("TwoButtonDlg1Box") then
@@ -156,7 +156,7 @@ function ThankTheResserPlus.ThankThem()
 		RessName = RessText:match(L"([%a]+).")
 	end
 	
-	local ColorName = L"<LINK data=\"0\" text=\""..towstring(RessName)..L" \" color=\"25,155,255\">"
+	local ColorName = L"<LINK data=\"0\" text=\""..towstring(RessName)..L"\" color=\"25,155,255\">"
 	ressPhrase = ThankTheResserPlus.GetRessPhrase()
 	
 	-- Original mod way
@@ -182,14 +182,14 @@ function ThankTheResserPlus.Randomize()
 end
 
 
--- Gets the thanks phrase dependat on mode
+-- Gets the thanks phrase depending on mode
 function ThankTheResserPlus.GetRessPhrase()
 	if (ThankTheResserPlus.Settings.Mode == "Word") then
 		res = ThankTheResserPlus.Settings.Word
 	elseif (ThankTheResserPlus.Settings.Mode == "Random") then
 		res = ThankTheResserPlus.Randomize()
 	else
-		res = "Ressurection Gratitude is provided by ThankTheResserPlus addon."
+		res = "Resurrection Gratitude is provided by ThankTheResserPlus addon."
 	end
 	return res
 end
