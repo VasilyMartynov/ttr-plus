@@ -51,7 +51,7 @@ function ttrp.PrintUsage()
 end
 
 
---This function is beeing called when the addon starts from ThankTheResserPlus.mod
+--This function is being called when the addon starts from ThankTheResserPlus.mod
 function ThankTheResserPlus.Initialize()
 
 	if (ttrp.Settings == nil) then
@@ -74,7 +74,7 @@ function ThankTheResserPlus.Initialize()
 	--print("<icon00057> Thank the Resser Plus"..towstring(ttrp.Version)..L"Loaded.")
 	print("Use /ttrp or /ThankTheResserPlus")
 
-	--Listens for for the player to accept ressurection and calls ThankTheResserPlus.ThankThem function
+	--Listens for for the player to accept resurrection and calls ThankTheResserPlus.ThankThem function
 	RegisterEventHandler(SystemData.Events.RESURRECTION_ACCEPT, "ThankTheResserPlus.ThankThem")
 	--Debug mode 
 	--RegisterEventHandler(SystemData.Events.PLAYER_BEGIN_CAST, "ThankTheResserPlus.ThankThem")
@@ -84,15 +84,15 @@ function ThankTheResserPlus.Initialize()
 end
 
 
---Inits local dictionary with pregenrated ressurection phrases 
+--Inits local dictionary with pregenerated resurrection phrases
 function ttrp.InitDictionary()
 	if (ttrp.Dictionary == nil) then
-		-- Custom strins can be added here
+		-- Custom strings can be added here
 		ttrp.Dictionary = {}
 		ttrp.Dictionary = {
 			"Thank you!",
 			"Cheers %p!",
-			"Ressurection appreciated.",
+			"Resurrection appreciated.",
 			"%p, I owe you.",
 			"You are breathtaking <3 !",
 			"Next one is on me, %p!"
@@ -150,7 +150,7 @@ function ttrp.Command(input)
 end
 
 
--- Mostly magical function that extracts Resser name form ressurection dialog window
+-- Mostly magical function that extracts Resser name form resurrection dialog window
 function ttrp.ResserName()
 	if DoesWindowExist("TwoButtonDlg1Box") then
 		RessText = LabelGetText("TwoButtonDlg1BoxText")
@@ -193,7 +193,7 @@ function ttrp.Randomize()
 end
 
 
--- Gets the thanks phrase dependat on mode
+-- Gets the thanks phrase depending on mode
 function ttrp.GetRessPhrase()
 	if (ttrp.Settings.Mode == "Word") then
 		res = ttrp.Settings.Word
