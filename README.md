@@ -17,7 +17,7 @@ Thank The Resser Plus.
 
 ## Usage
 
-Addon provides simple ingame console help and instructions.
+Addon provides simple in-game console help and instructions.
 
 `/ttrp off` - turns Thank The Resser off \
 `/ttrp on`  - turns Thank The Resser on
@@ -44,7 +44,7 @@ Edit `ThankTheResserPlus.Dictionary` variable in
 
 Better to do it before you start the game, after the first time.
 
-Try not to overuse some fancy graphics, it will basicly break the mod.
+Try not to overuse some fancy graphics, it will basically break the mod.
 
 Whenever it breaks midgame you can use `/ttrp init` to wipe changes and overwrite with initial dictionary.
 
